@@ -8,4 +8,9 @@ Data structures. Generics
 - Обеспечить возможность сериализации и десерилизации дерева в XMLфайл.
 - Разработать юнит-тесты для тестирования созданных классов.
 
-
+Project structure:
+- BinaryTree.cs - Class describing the implementation of a binary search tree.
+- BinaryTreeNode.cs - The BinaryTreeNode represents a single node in the tree.
+- XmlConverter.cs - Class for working with xml files.
+- Student.cs - Class describing the student's test result.
+- ClassLibraryUnitTests.cs - NUnitTests.
