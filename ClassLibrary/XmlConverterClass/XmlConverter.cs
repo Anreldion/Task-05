@@ -1,8 +1,6 @@
 ﻿using ClassLibrary.BinaryTreeClass;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace ClassLibrary.XmlConverterClass
@@ -40,7 +38,7 @@ namespace ClassLibrary.XmlConverterClass
             {
                 list = formatter.Deserialize(fs) as List<Student>;
             }
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 tree.Add(item);
             }

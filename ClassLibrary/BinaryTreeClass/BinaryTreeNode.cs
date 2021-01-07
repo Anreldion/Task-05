@@ -24,17 +24,17 @@ namespace ClassLibrary
         public BinaryTreeNode<T> Right;
 
         /// <summary>
-        /// Balance factor
-        /// 0 - Левая и правая ветвь имеют одинаковую высоту.
-        /// -1 - Левая ветка на еденицу выше чем правая ветка.
-        /// +1 - Правая ветка на еденицу выше чем левая ветка.
+        /// Balance factor:
+        /// 0 - The branches are the same height;
+        /// -1 - The left branch is one higher than the right branch;
+        /// +1 - The right branch is one higher than the left branch.
         /// </summary>
         public int Balancing { get; set; }
 
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Data item.</param>
         public BinaryTreeNode(T data)
         {
             Data = data;

@@ -5,16 +5,26 @@ using System.Linq;
 namespace ClassLibrary.BinaryTreeClass
 {
     /// <summary>
-    /// Класс описывающий реализацию бинарного дерева поиска
+    /// Class describing the implementation of a binary search tree.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T"><see cref="Student"/></typeparam>
     public class BinaryTree<T> where T : Student
     {
-        private BinaryTreeNode<T> RootNode = null;
-        private int count_node = 0;
-        public int Count => count_node;
         /// <summary>
-        /// 
+        /// Root node <see cref="BinaryTreeNode{T}"/>
+        /// </summary>
+        private BinaryTreeNode<T> RootNode = null;
+        /// <summary>
+        /// The number of nodes in a binary tree. Private field for <see cref="Count"/>
+        /// </summary>
+        private int count_node = 0;
+        /// <summary>
+        /// The number of nodes in a binary tree.
+        /// </summary>
+        public int Count => count_node;
+
+        /// <summary>
+        /// Parameterless constructor.
         /// </summary>
         public BinaryTree()
         {
@@ -32,7 +42,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// <summary>
         /// Recursive method for <see cref="Clear"/>
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node"><see cref="BinaryTreeNode{T}"/></param>
         private void Clear(BinaryTreeNode<T> node)
         {
             if (node == null)
@@ -46,14 +56,14 @@ namespace ClassLibrary.BinaryTreeClass
         }
 
         /// <summary>
-        /// Создать узел
+        /// Create new node.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private BinaryTreeNode<T> NewItem(T value)
+        /// <param name="data">Data.</param>
+        /// <returns><see cref="BinaryTreeNode{T}"/></returns>
+        private BinaryTreeNode<T> NewNode(T data)
         {
             count_node++;
-            BinaryTreeNode<T> node = new BinaryTreeNode<T>(value)
+            BinaryTreeNode<T> node = new BinaryTreeNode<T>(data)
             {
                 Balancing = 0
             };
@@ -61,14 +71,14 @@ namespace ClassLibrary.BinaryTreeClass
         }
 
         /// <summary>
-        /// Add data.
+        /// Add data to a binary tree
         /// </summary>
         /// <param name="data"></param>
         public void Add(T data)
         {
             if (RootNode == null)
             {
-                RootNode = NewItem(data);
+                RootNode = NewNode(data);
             }
             else
             {
@@ -80,15 +90,15 @@ namespace ClassLibrary.BinaryTreeClass
         /// <summary>
         /// Recursive method for <see cref="Add"/>
         /// </summary>
-        /// <param name="root"></param>
+        /// <param name="root"><see cref="BinaryTreeNode{T}"/></param>
         /// <param name="data">Data item</param>
-        /// <returns></returns>
+        /// <returns>true if an empty node is found, otherwise false</returns>
         private bool Insert(ref BinaryTreeNode<T> root, T data)
         {
             BinaryTreeNode<T> node = root;
             if (node == null)
             {
-                root = NewItem(data);
+                root = NewNode(data);
                 return true;
             }
 
@@ -116,109 +126,106 @@ namespace ClassLibrary.BinaryTreeClass
         /// <summary>
         /// Remove item from tree.
         /// </summary>
-        /// <param name="value"></param>
-        public void Remove(T value)
+        /// <param name="data">Data item</param>
+        public void Remove(T data)
         {
-            Remove(ref RootNode, value);
+            Remove(ref RootNode, data);
         }
         /// <summary>
         /// Recursive method for <see cref="Remove"/>
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="data"></param>
+        /// <param name="root"><see cref="BinaryTreeNode{T}"/></param>
+        /// <param name="data">Data item</param>
         /// <returns></returns>
         private bool Remove(ref BinaryTreeNode<T> root, T data)
         {
-            bool ok = false;
+            bool is_ok = false;
             BinaryTreeNode<T> node = root;
             if (node == null)
             {
                 return false;
             }
             if (data.CompareTo(node.Data) > 0)
-            //if (node.Data < value)
             {
-                //--node.BalanceFactor;
                 if (Remove(ref node.Right, data) && !Convert.ToBoolean(--node.Balancing))
                 {
-                    ok = true;
+                    is_ok = true;
                 }
             }
-            else
-            //if (node.Data > value)
-            if (data.CompareTo(node.Data) < 0)
+            else if (data.CompareTo(node.Data) < 0)
             {
                 if (Remove(ref node.Left, data) && !Convert.ToBoolean(++node.Balancing))
                 {
-                    ok = true;
+                    is_ok = true;
                 }
             }
             else
             {
-                // нашли вершину которую надо удалить
                 if (node.Right == null)
                 {
-                    // если есть возможность вырезать сразу, вырезаем
-                    root = node.Left;
                     count_node--;
+                    root = node.Left;
                     return true;
                 }
-                ok = GetMin(ref node.Right, ref root);   // находим вершину, которую вставляем на место удалённой
-                root.Balancing = node.Balancing;       // ставим на место удалённой вершины, нашу замену
-                root.Left = node.Left;
-                root.Right = node.Right;
                 count_node--;
-                if (ok)
+                is_ok = GetMin(ref node.Right, ref root);
+                root.Right = node.Right;
+                root.Left = node.Left;
+                root.Balancing = node.Balancing;
+                if (is_ok)
                 {
-                    //--root.BalanceFactor;
-                    ok = !Convert.ToBoolean(--node.Balancing);
+                    is_ok = !Convert.ToBoolean(--node.Balancing);
                 }
             }
-            return (Balance(ref root, ok ? BALANCE_HIGHT_CHANGE : 0) & BALANCE_HIGHT_CHANGE) != 0;
+            return (Balance(ref root, is_ok ? BALANCE_HIGHT_CHANGE : 0) & BALANCE_HIGHT_CHANGE) != 0;
         }
 
         /// <summary>
-        /// Search smallest node
+        /// Search smallest node.
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="res"></param>
+        /// <param name="root_position"><see cref="BinaryTreeNode{T}"/></param>
+        /// <param name="root"><see cref="BinaryTreeNode{T}"/></param>
         /// <returns></returns>
-        private bool GetMin(ref BinaryTreeNode<T> root, ref BinaryTreeNode<T> res)
+        private bool GetMin(ref BinaryTreeNode<T> root_position, ref BinaryTreeNode<T> root)
         {
-            BinaryTreeNode<T> node = root;
+            BinaryTreeNode<T> node = root_position;
             if (node.Left != null)
             {
-                //++node.BalanceFactor;
-                if (GetMin(ref node.Left, ref res) && !Convert.ToBoolean(++node.Balancing))
+                if (GetMin(ref node.Left, ref root) && !Convert.ToBoolean(++node.Balancing))
                 {
                     return true;
                 }
-                return (Balance(ref root) & BALANCE_HIGHT_CHANGE) != 0;
+                return (Balance(ref root_position) & BALANCE_HIGHT_CHANGE) != 0;
             }
-            res = node;
-            root = node.Right;
+            root = node;
+            root_position = node.Right;
             return true;
         }
 
 
-        // поведение балансировки
-        const int BALANCE_ROTATE = 1;   // произошло вращение
-        const int BALANCE_HIGHT_CHANGE = 2; // произошло изменение высоты балансировки удаления
         /// <summary>
-        /// Таблица балансировки для <see cref="TurnLeftToRight(ref BinaryTreeNode{T})"/ method>
+        /// A rotation of a binary tree node occurred
+        /// </summary>
+        private const int BALANCE_ROTATE = 1;
+        /// <summary>
+        /// There was a change in the height of the balancing removal
+        /// </summary>
+        private const int BALANCE_HIGHT_CHANGE = 2;
+        /// <summary>
+        /// Balancing table for <see cref="TurnLeftToRight(ref BinaryTreeNode{T})"/ method>
         /// </summary>
         private static readonly int[,] left_to_right_table = new int[6, 4] { { -1, -1, +1, +1 }, { -1, +0, +1, +0 }, { -1, +1, +2, +0 }, { -2, -1, +0, +0 }, { -2, -2, +0, +1 }, { -2, +0, +1, -1 } };
         /// <summary>
-        /// Таблица балансировки для <see cref="TurnRightToLeft(ref BinaryTreeNode{T})"/ method>
+        /// Balancing table for <see cref="TurnRightToLeft(ref BinaryTreeNode{T})"/ method>
         /// </summary>
         private static readonly int[,] right_to_left_table = new int[6, 4] { { +1, -1, -2, +0 }, { +1, +0, -1, +0 }, { +1, +1, -1, -1 }, { +2, +0, -1, +1 }, { +2, +1, +0, +0 }, { +2, +2, +0, -1 } };
 
         /// <summary>
-        /// Балансировка узла
+        /// Balancing a binary tree.
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="result"></param>
-        /// <returns></returns>
+        /// <param name="root"><see cref="BinaryTreeNode{T}"/></param>
+        /// <param name="result">Balancing behavior</param>
+        /// <returns>Balancing behavior</returns>
         private int Balance(ref BinaryTreeNode<T> root, int result = 0)
         {
             BinaryTreeNode<T> node = root;
@@ -254,7 +261,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// <summary>
         /// Check balance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true, otherwise false</returns>
         public bool CheckBalance()
         {
             if (CheckBalance(ref RootNode) < 0)
@@ -267,7 +274,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// <summary>
         /// Recursive method for <see cref="CheckBalance"/>
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node"><see cref="BinaryTreeNode{T}"/></param>
         /// <returns></returns>
         private int CheckBalance(ref BinaryTreeNode<T> node)
         {
@@ -339,10 +346,10 @@ namespace ClassLibrary.BinaryTreeClass
         }
 
         /// <summary>
-        /// Проверка, есть ли такие данные в дереве
+        /// Checking if there is such data in the tree.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns> Возвращает true если значение содержится в дереве. В противном случает возвращает false.</returns>
+        /// <param name="data">Data</param>
+        /// <returns>true if the value is contained in the tree. Otherwise, it returns false.</returns>
         public bool Contains(T data)
         {
             if (RootNode == null || data == null)
@@ -373,7 +380,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// Convert <see cref="BinaryTree{T}"/> to <see cref="List{T}"/>
         /// </summary>
         /// <returns><see cref="List{T}"/> of <see cref="Student"/></returns>
-        public List<T> ToList() 
+        public List<T> ToList()
         {
             List<T> list = new List<T>();
             ToList(RootNode, list);
@@ -418,8 +425,8 @@ namespace ClassLibrary.BinaryTreeClass
         public override string ToString()
         {
             List<T> list = ToList();
-            string data="";
-            foreach(var item in list)
+            string data = "";
+            foreach (var item in list)
             {
                 data += item.ToString() + "\n";
             }

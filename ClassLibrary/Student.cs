@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace ClassLibrary
 {
@@ -9,12 +8,26 @@ namespace ClassLibrary
     [Serializable]
     public class Student : IComparable<Student>
     {
+        /// <summary>
+        /// Test score. Private field for <see cref="TestScore"/>
+        /// </summary>
         private uint testScore;
 
+        /// <summary>
+        /// Parameterless constructor.
+        /// </summary>
         public Student()
         {
         }
 
+        /// <summary>
+        /// Constructor with parameters.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="testName"></param>
+        /// <param name="testScore"></param>
+        /// <param name="dateOfCompletion"></param>
         public Student(string name, string surname, string testName, uint testScore, DateTime dateOfCompletion)
         {
             Name = name;
@@ -39,12 +52,12 @@ namespace ClassLibrary
         /// <summary>
         /// Test score.
         /// </summary>
-        public uint TestScore 
-        { 
+        public uint TestScore
+        {
             get => testScore;
             set
             {
-                if(value <101)
+                if (value < 101)
                 {
                     testScore = value;
                 }
@@ -52,7 +65,7 @@ namespace ClassLibrary
                 {
                     throw new ArgumentException("The score cannot be higher than 100");
                 }
-                
+
             }
         }
 

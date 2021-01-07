@@ -156,8 +156,8 @@ namespace NUnitTests
             List<Student> list = Tree.ToList();
             Assert.AreEqual(count, list.Count);
         }
-
     }
+
     /// <summary>
     /// Testing method of <see cref="XmlConverter"/> class
     /// </summary>
@@ -201,7 +201,7 @@ namespace NUnitTests
             BinaryTree<Student> des_tree = XmlConverter.Deserialization("BinaryTree.xml");
             Assert.AreEqual(des_tree, Tree);
         }
-        
+
     }
 
 }
