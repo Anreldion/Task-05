@@ -12,17 +12,14 @@ namespace ClassLibrary
         /// Node data.
         /// </summary>
         public T Data { get; set; }
-
         /// <summary>
-        /// Left node. (<see cref="BinaryTreeNode{T}"/>)
+        /// Left node.
         /// </summary>
         public BinaryTreeNode<T> Left;
-
         /// <summary>
-        /// Right node. (<see cref="BinaryTreeNode{T}"/>)
+        /// Right node.
         /// </summary>
         public BinaryTreeNode<T> Right;
-
         /// <summary>
         /// Balance factor:
         /// 0 - The branches are the same height;
@@ -30,7 +27,6 @@ namespace ClassLibrary
         /// +1 - The right branch is one higher than the left branch.
         /// </summary>
         public int Balancing { get; set; }
-
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
@@ -39,7 +35,6 @@ namespace ClassLibrary
         {
             Data = data;
         }
-
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
@@ -52,13 +47,11 @@ namespace ClassLibrary
             this.Left = Left;
             this.Right = Right;
         }
-
         /// <inheritdoc cref="IComparable{T}.CompareTo(T)"/>
         public int CompareTo(T other)
         {
             return Data.CompareTo(other);
         }
-
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString()
         {

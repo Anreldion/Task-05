@@ -22,14 +22,12 @@ namespace ClassLibrary.BinaryTreeClass
         /// The number of nodes in a binary tree.
         /// </summary>
         public int Count => count_node;
-
         /// <summary>
         /// Parameterless constructor.
         /// </summary>
         public BinaryTree()
         {
         }
-
         /// <summary>
         /// Clear binary tree.
         /// </summary>
@@ -38,7 +36,6 @@ namespace ClassLibrary.BinaryTreeClass
             RootNode = null;
             count_node = 0;
         }
-
         /// <summary>
         /// Recursive method for <see cref="Clear"/>
         /// </summary>
@@ -54,7 +51,6 @@ namespace ClassLibrary.BinaryTreeClass
             Clear(node.Right);
             count_node--;
         }
-
         /// <summary>
         /// Create new node.
         /// </summary>
@@ -69,9 +65,8 @@ namespace ClassLibrary.BinaryTreeClass
             };
             return node;
         }
-
         /// <summary>
-        /// Add data to a binary tree
+        /// Add data to a binary tree.
         /// </summary>
         /// <param name="data"></param>
         public void Add(T data)
@@ -86,7 +81,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
 
         }
-
         /// <summary>
         /// Recursive method for <see cref="Add"/>
         /// </summary>
@@ -122,7 +116,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
             return result;
         }
-
         /// <summary>
         /// Remove item from tree.
         /// </summary>
@@ -179,7 +172,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
             return (Balance(ref root, is_ok ? BALANCE_HIGHT_CHANGE : 0) & BALANCE_HIGHT_CHANGE) != 0;
         }
-
         /// <summary>
         /// Search smallest node.
         /// </summary>
@@ -201,8 +193,6 @@ namespace ClassLibrary.BinaryTreeClass
             root_position = node.Right;
             return true;
         }
-
-
         /// <summary>
         /// A rotation of a binary tree node occurred
         /// </summary>
@@ -257,7 +247,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
             return result;
         }
-
         /// <summary>
         /// Check balance.
         /// </summary>
@@ -299,7 +288,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
             return Math.Max(left, right) + 1;
         }
-
         /// <summary>
         /// Rotate node from left to right.
         /// </summary>
@@ -344,7 +332,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
             return right_node;
         }
-
         /// <summary>
         /// Checking if there is such data in the tree.
         /// </summary>
@@ -375,7 +362,6 @@ namespace ClassLibrary.BinaryTreeClass
             }
             return false;
         }
-
         /// <summary>
         /// Convert <see cref="BinaryTree{T}"/> to <see cref="List{T}"/>
         /// </summary>
@@ -402,7 +388,6 @@ namespace ClassLibrary.BinaryTreeClass
             ToList(root.Left, list);
             ToList(root.Right, list);
         }
-
         /// <inheritdoc cref="object.Equals"/>
         public override bool Equals(object obj)
         {
@@ -413,14 +398,12 @@ namespace ClassLibrary.BinaryTreeClass
             return count_node == other_obj.count_node &&
                    Enumerable.SequenceEqual(list, obj_list);
         }
-
         /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode()
         {
             List<T> list = ToList();
             return HashCode.Combine(RootNode, Count, list.GetHashCode());
         }
-
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString()
         {

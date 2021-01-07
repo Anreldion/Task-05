@@ -13,7 +13,6 @@ namespace NUnitTests
     [TestFixture]
     class BinaryTreeTests
     {
-
         List<Student> listData;
         BinaryTree<Student> Tree;
 
@@ -33,7 +32,6 @@ namespace NUnitTests
                     dateOfCompletion: DateTime.Now));
             }
         }
-
         /// <summary>
         /// Testing methods: <see cref="BinaryTree.Add(T)"/>, <see cref="BinaryTree{T}.Contains(T)"/>, <see cref="BinaryTree{T}.Remove(T)"/>
         /// </summary>

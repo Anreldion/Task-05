@@ -12,22 +12,20 @@ namespace ClassLibrary
         /// Test score. Private field for <see cref="TestScore"/>
         /// </summary>
         private uint testScore;
-
         /// <summary>
         /// Parameterless constructor.
         /// </summary>
         public Student()
         {
         }
-
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="surname"></param>
-        /// <param name="testName"></param>
-        /// <param name="testScore"></param>
-        /// <param name="dateOfCompletion"></param>
+        /// <param name="name"><see cref="Student.Name"/></param>
+        /// <param name="surname"><see cref="Student.Surname"/></param>
+        /// <param name="testName"><see cref="Student.TestName"/></param>
+        /// <param name="testScore"><see cref="Student.TestScore"/></param>
+        /// <param name="dateOfCompletion"><see cref="Student.DateOfCompletion"/></param>
         public Student(string name, string surname, string testName, uint testScore, DateTime dateOfCompletion)
         {
             Name = name;
@@ -36,7 +34,6 @@ namespace ClassLibrary
             TestScore = testScore;
             DateOfCompletion = dateOfCompletion;
         }
-
         /// <summary>
         /// Student name.
         /// </summary>
@@ -68,24 +65,20 @@ namespace ClassLibrary
 
             }
         }
-
         /// <summary>
         /// Test completion date.
         /// </summary>
         public DateTime DateOfCompletion { get; set; }
-
         /// <inheritdoc cref="IComparable{T}.CompareTo(T)"/>
         public int CompareTo(Student other)
         {
             return TestScore.CompareTo(other.TestScore);
         }
-
         /// <inheritdoc cref="object.ToString" />
         public override string ToString()
         {
             return String.Format("Test score: {3}, Student name: {0} {1}, Test name: {2}, Date of completion: {4}", Name, Surname, TestName, TestScore, DateOfCompletion.ToString("dd.MM.yy HH:mm"));
         }
-
         /// <inheritdoc cref="object.Equals(object)" />
         public override bool Equals(object obj)
         {
@@ -96,13 +89,10 @@ namespace ClassLibrary
                    TestScore == student.TestScore &&
                    DateOfCompletion == student.DateOfCompletion;
         }
-
         /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode()
         {
             return HashCode.Combine(Name, TestName, TestScore, DateOfCompletion);
         }
-
-
     }
 }

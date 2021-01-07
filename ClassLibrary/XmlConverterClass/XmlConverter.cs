@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace ClassLibrary.XmlConverterClass
 {
     /// <summary>
-    /// 
+    /// Class for working with xml files
     /// </summary>
     public class XmlConverter
     {
@@ -22,7 +22,6 @@ namespace ClassLibrary.XmlConverterClass
             using FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
             formatter.Serialize(fs, list);
         }
-
         /// <summary>
         /// Deserializing the <see cref="BinaryTree{Student}"/>
         /// </summary>
