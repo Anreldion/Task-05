@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace ClassLibrary.XmlConverterClass
 {
     /// <summary>
-    /// Class for working with xml files
+    /// Class for working with xml files.
     /// </summary>
     public class XmlConverter
     {

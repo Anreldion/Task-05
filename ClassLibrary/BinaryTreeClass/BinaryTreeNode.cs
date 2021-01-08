@@ -3,13 +3,13 @@
 namespace ClassLibrary
 {
     /// <summary>
-    /// The BinaryTreeNode represents a single node in the tree.
+    /// The binary tree node represents a single node in the tree.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class BinaryTreeNode<T> : IComparable<T> where T : Student
     {
         /// <summary>
-        /// Node data.
+        /// Data node.
         /// </summary>
         public T Data { get; set; }
         /// <summary>
@@ -22,9 +22,9 @@ namespace ClassLibrary
         public BinaryTreeNode<T> Right;
         /// <summary>
         /// Balance factor:
-        /// 0 - The branches are the same height;
-        /// -1 - The left branch is one higher than the right branch;
-        /// +1 - The right branch is one higher than the left branch.
+        /// 0 - The branches are the same depth;
+        /// -1 - The left branch is one node lower than the right branch;
+        /// +1 - The right branch is one node lower than the left branch.
         /// </summary>
         public int Balancing { get; set; }
         /// <summary>
@@ -38,7 +38,7 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
-        /// <param name="Data">Node data.</param>
+        /// <param name="Data">Data node.</param>
         /// <param name="Left">Left node.</param>
         /// <param name="Right">Right node.</param>
         public BinaryTreeNode(T Data, BinaryTreeNode<T> Left, BinaryTreeNode<T> Right)

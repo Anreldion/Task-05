@@ -3,7 +3,7 @@
 namespace ClassLibrary
 {
     /// <summary>
-    /// Class describing the student's test result
+    /// Class describing the student's test result.
     /// </summary>
     [Serializable]
     public class Student : IComparable<Student>

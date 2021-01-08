@@ -5,7 +5,7 @@ using System.Linq;
 namespace ClassLibrary.BinaryTreeClass
 {
     /// <summary>
-    /// Class describing the implementation of a binary search tree.
+    /// Class describing the execution of a binary search tree.
     /// </summary>
     /// <typeparam name="T"><see cref="Student"/></typeparam>
     public class BinaryTree<T> where T : Student
@@ -54,7 +54,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// <summary>
         /// Create new node.
         /// </summary>
-        /// <param name="data">Data.</param>
+        /// <param name="data">Data item.</param>
         /// <returns><see cref="BinaryTreeNode{T}"/></returns>
         private BinaryTreeNode<T> NewNode(T data)
         {
@@ -173,7 +173,7 @@ namespace ClassLibrary.BinaryTreeClass
             return (Balance(ref root, is_ok ? BALANCE_HIGHT_CHANGE : 0) & BALANCE_HIGHT_CHANGE) != 0;
         }
         /// <summary>
-        /// Search smallest node.
+        /// Find the smallest node.
         /// </summary>
         /// <param name="root_position"><see cref="BinaryTreeNode{T}"/></param>
         /// <param name="root"><see cref="BinaryTreeNode{T}"/></param>
@@ -198,7 +198,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// </summary>
         private const int BALANCE_ROTATE = 1;
         /// <summary>
-        /// There was a change in the height of the balancing removal
+        /// As a result of node removal a change in the depth has occured.
         /// </summary>
         private const int BALANCE_HIGHT_CHANGE = 2;
         /// <summary>
@@ -336,7 +336,7 @@ namespace ClassLibrary.BinaryTreeClass
         /// Checking if there is such data in the tree.
         /// </summary>
         /// <param name="data">Data</param>
-        /// <returns>true if the value is contained in the tree. Otherwise, it returns false.</returns>
+        /// <returns>true if the data is contained in the tree. Otherwise, it returns false.</returns>
         public bool Contains(T data)
         {
             if (RootNode == null || data == null)
